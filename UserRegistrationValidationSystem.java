@@ -32,6 +32,19 @@ public class UserRegistrationValidationSystem {
 		else
 			System.out.println("-------- Invalid Last Name! --------");
 	}
+	
+	//check email-id
+	public static void validate_email(Scanner userInput){
+		System.out.print("\nEnter Email Id :");
+		String email=userInput.nextLine();
+		String emailPattern="^[a-zA-Z]{3}[a-zA-Z0-9\\.\\-\\_\\+]*(?<!\\.|\\+|\\_|\\-)\\@[a-z0-9]*(\\.[a-z]{2,3})(\\.[a-z]{2,3})?$";
+		pattern=Pattern.compile(emailPattern);
+		matcher=pattern.matcher(email);
+		if(matcher.matches())
+			System.out.println("------- Valid Email-Id! --------");
+		else
+			System.out.println("-------- Invalid Email-Id! --------");
+	}
 		
 	public static void main(String args[]) {
 		System.out.println("Welcome to User Registration Validation System!");
@@ -39,7 +52,7 @@ public class UserRegistrationValidationSystem {
 		int choice;
 		do {
 			System.out.println("\n****************** OPTIONS ********************\n");
-			System.out.println("1]Check First Name\n2]Check Last Name\n3]Exit");
+			System.out.println("1]Check First Name\n2]Check Last Name\n3]Check Email\n4]Exit");
 			System.out.print("Enter your choice :");
 			choice=userInput.nextInt();
 			userInput.nextLine();
@@ -48,8 +61,10 @@ public class UserRegistrationValidationSystem {
 						break;
 				case 2:validate_lastName(userInput);
 						break;
-				case 3:System.exit(0);
+				case 3:validate_email(userInput);
+					    break;
+				case 4:System.exit(0);
 			}
-		}while(choice!=3);
+		}while(choice!=4);
 	}	
 }
