@@ -15,17 +15,41 @@ public class UserRegistrationValidationSystem {
 		pattern=Pattern.compile(firstNamePattern);
 		matcher=pattern.matcher(firstName);
 		if(matcher.matches())
-			System.out.println("Valid First Name !");
+			System.out.println("------- Valid First Name! -------");
 		else
-			System.out.println("Invalid First Name !");
-		
+			System.out.println("------- Invalid First Name! --------");
 	}
 	
+	//check last name (Starting with capital and has min 3 characters)
+	public static void validate_lastName(Scanner userInput){
+		System.out.print("\nEnter Last Name :");
+		String lastName=userInput.nextLine();
+		String lastNamePattern="^[A-Z]{1}[a-zA-Z]{2}[a-zA-Z]*$";
+		pattern=Pattern.compile(lastNamePattern);
+		matcher=pattern.matcher(lastName);
+		if(matcher.matches())
+			System.out.println("------- Valid Last Name! --------");
+		else
+			System.out.println("-------- Invalid Last Name! --------");
+	}
+		
 	public static void main(String args[]) {
 		System.out.println("Welcome to User Registration Validation System!");
 		Scanner userInput=new Scanner(System.in);
-		validate_firstName(userInput);
-	}
-	
-	
+		int choice;
+		do {
+			System.out.println("\n****************** OPTIONS ********************\n");
+			System.out.println("1]Check First Name\n2]Check Last Name\n3]Exit");
+			System.out.print("Enter your choice :");
+			choice=userInput.nextInt();
+			userInput.nextLine();
+			switch(choice) {
+				case 1: validate_firstName(userInput);
+						break;
+				case 2:validate_lastName(userInput);
+						break;
+				case 3:System.exit(0);
+			}
+		}while(choice!=3);
+	}	
 }
