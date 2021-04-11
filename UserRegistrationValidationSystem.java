@@ -58,19 +58,32 @@ public class UserRegistrationValidationSystem {
 		else
 			System.out.println("-------- Invalid Phone Number! --------");
 	}
-
+	
+	//check password
+	public static void validate_password(Scanner userInput){
+		System.out.print("\nEnter Password :");
+		String password=userInput.nextLine();
+		String passwordPattern="^[a-zA-Z]{8,}";
+		pattern=Pattern.compile(passwordPattern);
+		matcher=pattern.matcher(password);
+		if(matcher.matches())
+			System.out.println("------- Valid Password! --------");
+		else
+			System.out.println("-------- Invalid Password! --------");
+	}
+	
 	public static void main(String args[]) {
 		System.out.println("Welcome to User Registration Validation System!");
 		Scanner userInput=new Scanner(System.in);
 		int choice;
 		do {
 			System.out.println("\n****************** OPTIONS ********************\n");
-			System.out.println("1]Check First Name\n2]Check Last Name\n3]Check Email\n4]Check Contact\n5]Exit");
+			System.out.println("1]Check First Name\n2]Check Last Name\n3]Check Email\n4]Check Contact\n5]Check Password\n6]Exit");
 			System.out.print("Enter your choice :");
 			choice=userInput.nextInt();
 			userInput.nextLine();
 			switch(choice) {
-				case 1: validate_firstName(userInput);
+				case 1:validate_firstName(userInput);
 				        break;
 				case 2:validate_lastName(userInput);
 				       break;
@@ -78,8 +91,10 @@ public class UserRegistrationValidationSystem {
 				       break;
 				case 4:validate_contact(userInput);
 				       break;
-				case 5:System.exit(0);
+				case 5:validate_password(userInput);
+				       break;
+				case 6:System.exit(0);
 			}
-		}while(choice!=5);
+		}while(choice!=6);
 	}
 }
