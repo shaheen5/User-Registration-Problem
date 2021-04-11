@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 public class UserRegistrationValidationSystem {
 	public static Pattern pattern;
 	public static Matcher matcher;
-	
+
 	//check first name (Starting with capital and has min 3 characters)
 	public static void validate_firstName(Scanner userInput){
 		System.out.print("\nEnter First Name :");
@@ -19,7 +19,7 @@ public class UserRegistrationValidationSystem {
 		else
 			System.out.println("------- Invalid First Name! --------");
 	}
-	
+
 	//check last name (Starting with capital and has min 3 characters)
 	public static void validate_lastName(Scanner userInput){
 		System.out.print("\nEnter Last Name :");
@@ -32,7 +32,7 @@ public class UserRegistrationValidationSystem {
 		else
 			System.out.println("-------- Invalid Last Name! --------");
 	}
-	
+
 	//check email-id
 	public static void validate_email(Scanner userInput){
 		System.out.print("\nEnter Email Id :");
@@ -45,26 +45,41 @@ public class UserRegistrationValidationSystem {
 		else
 			System.out.println("-------- Invalid Email-Id! --------");
 	}
-		
+
+	//check contact details (Starting with 91,space,10 digits)
+	public static void validate_contact(Scanner userInput){
+		System.out.print("\nEnter Contact number :");
+		String contact=userInput.nextLine();
+		String contactPattern="^(91)\\s[6-9]{1}[0-9]{9}$";
+		pattern=Pattern.compile(contactPattern);
+		matcher=pattern.matcher(contact);
+		if(matcher.matches())
+			System.out.println("------- Valid Phone Number! --------");
+		else
+			System.out.println("-------- Invalid Phone Number! --------");
+	}
+
 	public static void main(String args[]) {
 		System.out.println("Welcome to User Registration Validation System!");
 		Scanner userInput=new Scanner(System.in);
 		int choice;
 		do {
 			System.out.println("\n****************** OPTIONS ********************\n");
-			System.out.println("1]Check First Name\n2]Check Last Name\n3]Check Email\n4]Exit");
+			System.out.println("1]Check First Name\n2]Check Last Name\n3]Check Email\n4]Check Contact\n5]Exit");
 			System.out.print("Enter your choice :");
 			choice=userInput.nextInt();
 			userInput.nextLine();
 			switch(choice) {
 				case 1: validate_firstName(userInput);
-						break;
+				        break;
 				case 2:validate_lastName(userInput);
-						break;
+				       break;
 				case 3:validate_email(userInput);
-					    break;
-				case 4:System.exit(0);
+				       break;
+				case 4:validate_contact(userInput);
+				       break;
+				case 5:System.exit(0);
 			}
-		}while(choice!=4);
-	}	
+		}while(choice!=5);
+	}
 }
