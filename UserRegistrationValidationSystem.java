@@ -1,4 +1,6 @@
 package Java_Regex;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -37,7 +39,7 @@ public class UserRegistrationValidationSystem {
 	public static void validate_email(Scanner userInput){
 		System.out.print("\nEnter Email Id :");
 		String email=userInput.nextLine();
-		String emailPattern="^[a-zA-Z]{3}[a-zA-Z0-9\\.\\-\\_\\+]*(?<!\\.|\\+|\\_|\\-)\\@[a-z0-9]*(\\.[a-z]{2,3})(\\.[a-z]{2,3})?$";
+		String emailPattern="^[a-zA-Z]{3}[a-zA-Z0-9\\-\\_\\+]*(\\.)?[a-zA-Z0-9]*(?<!\\.|\\+|\\_|\\-)\\@(?!\\.)[a-z0-9]*(\\.[a-z]{2,3})(\\.[a-z]{2,3})?$";
 		pattern=Pattern.compile(emailPattern);
 		matcher=pattern.matcher(email);
 		if(matcher.matches())
@@ -71,6 +73,37 @@ public class UserRegistrationValidationSystem {
 		else
 			System.out.println("-------- Invalid Password! --------");
 	}
+	 //validate all sample emails in list
+	public static void validate_emailSamples(){
+		ArrayList<String> emails=new ArrayList<String>();
+		//valid emails
+		emails.add("abc@yahoo.com");
+		emails.add("abc-100@yahoo.com");
+		emails.add("abc.100@yahoo.com");
+		emails.add("abc111@yahoo.com");
+		emails.add("abc.100@abc.com.au");
+		emails.add("abc+100@gmail.com");
+		emails.add("abc@gmail.com.com");
+		emails.add("abc@1.com");
+		//invalid mails
+		emails.add("abc123@.com");
+		emails.add(".abc@abc.com");
+		emails.add("abc123@gmail.a");
+		emails.add("abc()*@yahoo.in");
+		emails.add("abc-");
+		emails.add("abc@gmail.com.au.bu");
+		emails.add("abc@yahoo.in.1a");
+		emails.add("abc@*%.com");
+		emails.add("abc@abc@gmail.com");
+		emails.add("abc..20002@gmail.com");
+		
+		String emailPattern="^[a-zA-Z]{3}[a-zA-Z0-9\\-\\_\\+]*(\\.)?[a-zA-Z0-9]*(?<!\\.|\\+|\\_|\\-)\\@(?!\\.)[a-z0-9]*(\\.[a-z]{2,3})(\\.[a-z]{2,3})?$";
+		pattern=Pattern.compile(emailPattern);
+		for(String email : emails){
+		    matcher = pattern.matcher(email);
+		    System.out.println(email +" : "+ matcher.matches());
+		}
+	}
 	
 	public static void main(String args[]) {
 		System.out.println("Welcome to User Registration Validation System!");
@@ -78,7 +111,8 @@ public class UserRegistrationValidationSystem {
 		int choice;
 		do {
 			System.out.println("\n****************** OPTIONS ********************\n");
-			System.out.println("1]Check First Name\n2]Check Last Name\n3]Check Email\n4]Check Contact\n5]Check Password\n6]Exit");
+			System.out.println("1]Check First Name\n2]Check Last Name\n3]Check Email\n4]Check Contact\n5]Check Password\n"
+					+ "6]Check Email Samples\n7]Exit");
 			System.out.print("Enter your choice :");
 			choice=userInput.nextInt();
 			userInput.nextLine();
@@ -93,8 +127,10 @@ public class UserRegistrationValidationSystem {
 				       break;
 				case 5:validate_password(userInput);
 				       break;
-				case 6:System.exit(0);
+				case 6:validate_emailSamples();
+					   break;
+				case 7:System.exit(0);
 			}
-		}while(choice!=6);
+		}while(choice!=7);
 	}
 }
