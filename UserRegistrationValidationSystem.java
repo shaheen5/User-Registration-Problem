@@ -1,136 +1,44 @@
 package Java_Regex;
 
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 public class UserRegistrationValidationSystem {
 	public static Pattern pattern;
 	public static Matcher matcher;
-
+	
 	//check first name (Starting with capital and has min 3 characters)
-	public static void validate_firstName(Scanner userInput){
-		System.out.print("\nEnter First Name :");
-		String firstName=userInput.nextLine();
+	public static boolean validate_firstName(String firstName){
 		String firstNamePattern="^[A-Z]{1}[a-zA-Z]{2}[a-zA-Z]*$";
 		pattern=Pattern.compile(firstNamePattern);
-		matcher=pattern.matcher(firstName);
-		if(matcher.matches())
-			System.out.println("------- Valid First Name! -------");
-		else
-			System.out.println("------- Invalid First Name! --------");
+		return pattern.matcher(firstName).matches();
 	}
 
 	//check last name (Starting with capital and has min 3 characters)
-	public static void validate_lastName(Scanner userInput){
-		System.out.print("\nEnter Last Name :");
-		String lastName=userInput.nextLine();
+	public static boolean validate_lastName(String lastName){
 		String lastNamePattern="^[A-Z]{1}[a-zA-Z]{2}[a-zA-Z]*$";
 		pattern=Pattern.compile(lastNamePattern);
-		matcher=pattern.matcher(lastName);
-		if(matcher.matches())
-			System.out.println("------- Valid Last Name! --------");
-		else
-			System.out.println("-------- Invalid Last Name! --------");
+		return pattern.matcher(lastName).matches();
 	}
 
 	//check email-id
-	public static void validate_email(Scanner userInput){
-		System.out.print("\nEnter Email Id :");
-		String email=userInput.nextLine();
+	public static boolean validate_email(String email){
 		String emailPattern="^[a-zA-Z]{3}[a-zA-Z0-9\\-\\_\\+]*(\\.)?[a-zA-Z0-9]*(?<!\\.|\\+|\\_|\\-)\\@(?!\\.)[a-z0-9]*(\\.[a-z]{2,3})(\\.[a-z]{2,3})?$";
 		pattern=Pattern.compile(emailPattern);
-		matcher=pattern.matcher(email);
-		if(matcher.matches())
-			System.out.println("------- Valid Email-Id! --------");
-		else
-			System.out.println("-------- Invalid Email-Id! --------");
+		return pattern.matcher(email).matches();
 	}
 
 	//check contact details (Starting with 91,space,10 digits)
-	public static void validate_contact(Scanner userInput){
-		System.out.print("\nEnter Contact number :");
-		String contact=userInput.nextLine();
+	public static boolean validate_contact(String contact){
 		String contactPattern="^(91)\\s[6-9]{1}[0-9]{9}$";
 		pattern=Pattern.compile(contactPattern);
-		matcher=pattern.matcher(contact);
-		if(matcher.matches())
-			System.out.println("------- Valid Phone Number! --------");
-		else
-			System.out.println("-------- Invalid Phone Number! --------");
+		return pattern.matcher(contact).matches();
 	}
 	
 	//check password
-	public static void validate_password(Scanner userInput){
-		System.out.print("\nEnter Password :");
-		String password=userInput.nextLine();
+	public static boolean validate_password(String password){
 		String passwordPattern="^[a-z]*(?=.*[A-Z])(?=.*\\d)(?=[^\\W]*[\\W][^\\W]*$).{8,}$";
 		pattern=Pattern.compile(passwordPattern);
-		matcher=pattern.matcher(password);
-		if(matcher.matches())
-			System.out.println("------- Valid Password! --------");
-		else
-			System.out.println("-------- Invalid Password! --------");
-	}
-	 //validate all sample emails in list
-	public static void validate_emailSamples(){
-		ArrayList<String> emails=new ArrayList<String>();
-		//valid emails
-		emails.add("abc@yahoo.com");
-		emails.add("abc-100@yahoo.com");
-		emails.add("abc.100@yahoo.com");
-		emails.add("abc111@yahoo.com");
-		emails.add("abc.100@abc.com.au");
-		emails.add("abc+100@gmail.com");
-		emails.add("abc@gmail.com.com");
-		emails.add("abc@1.com");
-		//invalid mails
-		emails.add("abc123@.com");
-		emails.add(".abc@abc.com");
-		emails.add("abc123@gmail.a");
-		emails.add("abc()*@yahoo.in");
-		emails.add("abc-");
-		emails.add("abc@gmail.com.au.bu");
-		emails.add("abc@yahoo.in.1a");
-		emails.add("abc@*%.com");
-		emails.add("abc@abc@gmail.com");
-		emails.add("abc..20002@gmail.com");
-		
-		String emailPattern="^[a-zA-Z]{3}[a-zA-Z0-9\\-\\_\\+]*(\\.)?[a-zA-Z0-9]*(?<!\\.|\\+|\\_|\\-)\\@(?!\\.)[a-z0-9]*(\\.[a-z]{2,3})(\\.[a-z]{2,3})?$";
-		pattern=Pattern.compile(emailPattern);
-		for(String email : emails){
-		    matcher = pattern.matcher(email);
-		    System.out.println(email +" : "+ matcher.matches());
-		}
-	}
-	
-	public static void main(String args[]) {
-		System.out.println("Welcome to User Registration Validation System!");
-		Scanner userInput=new Scanner(System.in);
-		int choice;
-		do {
-			System.out.println("\n****************** OPTIONS ********************\n");
-			System.out.println("1]Check First Name\n2]Check Last Name\n3]Check Email\n4]Check Contact\n5]Check Password\n"
-					+ "6]Check Email Samples\n7]Exit");
-			System.out.print("Enter your choice :");
-			choice=userInput.nextInt();
-			userInput.nextLine();
-			switch(choice) {
-				case 1:validate_firstName(userInput);
-				        break;
-				case 2:validate_lastName(userInput);
-				       break;
-				case 3:validate_email(userInput);
-				       break;
-				case 4:validate_contact(userInput);
-				       break;
-				case 5:validate_password(userInput);
-				       break;
-				case 6:validate_emailSamples();
-					   break;
-				case 7:System.exit(0);
-			}
-		}while(choice!=7);
+		return pattern.matcher(password).matches();
 	}
 }
