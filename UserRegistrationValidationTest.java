@@ -2,7 +2,7 @@ package com.userregistrationproblem;
 import org.junit.Test;
 import org.junit.Assert;
 
-public class ValidateUserRegistrationTest {
+public class UserRegistrationValidationTest {
     @Test
     public void givenFirstName_WhenProper_ReturnTrue() {
         try {
