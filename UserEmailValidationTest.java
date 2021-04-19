@@ -1,4 +1,4 @@
-package Java_Regex;
+package com.userregistrationproblem;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -20,19 +20,19 @@ import org.junit.runners.Parameterized;
 
         @Parameterized.Parameters
         public static Collection<Object[]> input(){
-            return Arrays.asList(new Object[][] {
-            	{"abc@yahoo.com",true},{"abc-100@yahoo.com",true},{"abc123@.com",false},
-            	{".abc@abc.com",false},{"abc111@yahoo.com",true},{"abc123@gmail.a",false},
-                {"abc()*@yahoo.in",false},{"abc.100@abc.com.au",true},{"abc+100@gmail.com",true},{"abc-",false},
-                {"abc@gmail.com.au.bu",false},{"abc@yahoo.in.1a",false},{"abc@*%.com",false},{"abc@gmail.com.com",true},
-                {"abc@1.com",true},{"abc..20002@gmail.com",false},{"abc@abc@gmail.com",false}
+            return Arrays.asList(new Object[][] { {"abc@yahoo.com",true},{"abc-100@yahoo.com",true},
+                    {"abc123@.com",false},{".abc@abc.com",false},{"abc111@yahoo.com",true},{"abc123@gmail.a",false},
+                    {"abc()*@yahoo.in",false},{"abc.100@abc.com.au",true},{"abc+100@gmail.com",true},{"abc-",false},
+                    {"abc@gmail.com.au.bu",false},{"abc@yahoo.in.1a",false},{"abc@*%.com",false},{"abc@gmail.com.com",true},
+                    {"abc@1.com",true},{"abc..20002@gmail.com",false},{"abc@abc@gmail.com",false}
             });
         }
 
         @Test
-        public void EmailValidationtest() {
+        public void EmailValidationtest() throws UserValidationException {
             System.out.println(user_email+" : "+expectedResult);
             boolean result=UserRegistrationValidationSystem.validate_email(user_email);
             Assert.assertEquals(expectedResult, result);
         }
+
     }
